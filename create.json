@@ -1,0 +1,26 @@
+{
+    "id": "pe_ZdhrWZR9ueRrO7o9EY8Nw",
+    "contact": {
+        "id": "ct_eWUkYLiExxXb2co20tLpB",
+        "first_name": "Bassem",
+        "last_name": "GmbH",
+        "gender": "male",
+        "handles": [
+            {
+                "id": "ch_t2EkIhZgdDzH4jtn9Ob4U",
+                "type": "mail",
+                "value": "fdvd@gmail.com"
+            },
+            {
+                "id": "ch_BBYRTnu0YpWIiwPG1BrKi",
+                "type": "phone",
+                "value": "+4943670407794555"
+            }
+        ],
+        "custom_attributes": [],
+        "url": "/contacts/ct_eWUkYLiExxXb2co20tLpB",
+        "created_at": "2024-11-14T11:49:51.954860Z",
+        "updated_at": "2024-11-14T11:49:52.087356Z"
+    },
+    "event": "contact_created"
+}

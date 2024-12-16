@@ -1,0 +1,67 @@
+{
+    "id": "pe_VzYGlKH0ZqCA65j72qeD7",
+    "contact": {
+        "id": "ct_fa1LJLUSVJjUDklmVICB2",
+        "first_name": "Wolfgang",
+        "last_name": "Stocker",
+        "gender": "male",
+        "handles": [
+            {
+                "id": "ch_OWclGVpcWGyMXPIyxL5yP",
+                "type": "mail",
+                "value": "wolfgangstocker@gmx.net"
+            },
+            {
+                "id": "ch_974Jgk9LlR918eVAiwx0w",
+                "type": "phone",
+                "value": "+436507234870"
+            }
+        ],
+        "custom_attributes": [
+            {
+                "id": "ca_XuKm39fHzpu4WisPx2l4i",
+                "contact_id": "ct_fa1LJLUSVJjUDklmVICB2",
+                "name": "Customer ID",
+                "value": "101000709",
+                "type": "text",
+                "url": "/contacts/ct_fa1LJLUSVJjUDklmVICB2/custom-attributes/ca_XuKm39fHzpu4WisPx2l4i"
+            },
+            {
+                "id": "ca_APEZq61rGL5fkizg0qil0",
+                "contact_id": "ct_fa1LJLUSVJjUDklmVICB2",
+                "name": "Phase",
+                "value": "VIP Paket",
+                "type": "text",
+                "url": "/contacts/ct_fa1LJLUSVJjUDklmVICB2/custom-attributes/ca_APEZq61rGL5fkizg0qil0"
+            },
+            {
+                "id": "ca_PFtsMv5ec0zx5kUFhfZEy",
+                "contact_id": "ct_fa1LJLUSVJjUDklmVICB2",
+                "name": "Stufe",
+                "value": "Abschluss (VIP Paket)",
+                "type": "text",
+                "url": "/contacts/ct_fa1LJLUSVJjUDklmVICB2/custom-attributes/ca_PFtsMv5ec0zx5kUFhfZEy"
+            },
+            {
+                "id": "ca_3m1po2Q8GjQbCQN7uKb6w",
+                "contact_id": "ct_fa1LJLUSVJjUDklmVICB2",
+                "name": "TESTINGpt",
+                "value": "0",
+                "type": "single_select",
+                "url": "/contacts/ct_fa1LJLUSVJjUDklmVICB2/custom-attributes/ca_3m1po2Q8GjQbCQN7uKb6w"
+            },
+            {
+                "id": "ca_R4FsXahlvXXWAr6C0KsFe",
+                "contact_id": "ct_fa1LJLUSVJjUDklmVICB2",
+                "name": "NACHRICHT OHNE ANTWORT",
+                "value": 1,
+                "type": "number",
+                "url": "/contacts/ct_fa1LJLUSVJjUDklmVICB2/custom-attributes/ca_R4FsXahlvXXWAr6C0KsFe"
+            }
+        ],
+        "url": "/contacts/ct_fa1LJLUSVJjUDklmVICB2",
+        "created_at": "2024-01-23T17:51:44.290876Z",
+        "updated_at": "2024-11-14T12:01:03.259122Z"
+    },
+    "event": "contact_updated"
+}

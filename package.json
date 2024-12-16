@@ -1,0 +1,21 @@
+{
+  "name": "fitnrss-coach",
+  "version": "1.0.0",
+  "description": "server to send daily messages to customers in superchat",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bassem",
+  "license": "ISC",
+  "dependencies": {
+    "node-cron": "^3.0.3",
+    "body-parser": "^1.20.2",
+    "express": "^4.17.1",
+    "dirname": "^0.1.0",
+    "dotenv": "^16.4.5",
+    "pm2": "^5.4.1",
+    "@ngrok/ngrok": "^1.3.0"
+  }
+}
