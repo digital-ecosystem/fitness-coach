@@ -1,9 +1,7 @@
 import fs from 'fs';
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import { errorMonitor } from 'events';
-
-
+import { SUPERCHAT_API_KEY } from "../config/index.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -130,7 +128,7 @@ async function getAllImages (){
     method: 'GET',
     headers: {
         accept: 'application/json',
-        'X-API-KEY': '9358a240-6995-41b9-b6f7-aff9ba96e940'
+        'X-API-KEY': SUPERCHAT_API_KEY
     }
     };
 
