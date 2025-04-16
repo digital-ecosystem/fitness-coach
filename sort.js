@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { errorMonitor } from 'events';
 
 
 
@@ -120,7 +121,48 @@ function splitFiles () {
     console.log(videos.length);
 }
 
-//splitFiles();
+
+async function getAllImages (){
+    let results = [];
+    let after = null;
+    let url = 'https://api.superchat.com/v1.0/files?limit=100';
+    const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        'X-API-KEY': '9358a240-6995-41b9-b6f7-aff9ba96e940'
+    }
+    };
+
+    try {
+        const response = await fetch(url, options)
+        .then(res => res.json());
+        results = results.concat(response.results);
+        after = response.pagination.next_cursor;
+        while (after) {
+            let url2 = url + "&after=" + after;
+            let response2 = await fetch(url2, options)
+            .then(res => res.json());
+            const contacts1 = response2.results;
+            results = results.concat(contacts1);
+            after = response2.pagination.next_cursor;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    const images = [];
+    for (let index = 0; index < results.length; index++) {
+        const result = results[index];
+        if (result.mime_type === 'image/png')
+        {
+            images.push(result);
+            console.log(index);
+        }
+    }
+    fs.writeFileSync(__dirname + '/images.json', JSON.stringify(images, null, 2));
+    console.log(results.length);
+}
+
 
 function addTemplates () {
     const data = fs.readFileSync(__dirname + '/videos.json', 'utf-8');
@@ -146,7 +188,6 @@ function addTemplates () {
     console.log(updatedVideos.length);
 }
 
-//addTemplates();
 
 
 function addVideosTOTemplates() {
@@ -160,9 +201,13 @@ function addVideosTOTemplates() {
     let index = 0;
     let dayIndex = 1;
     for(let i = 0; i < 30; i++) {
-        if (dayIndex < 10)
-            dayIndex = '0' + dayIndex;
-        templatesData[month][dayIndex].video = videos[index];
+        const data = {
+            id: videos[index].id,
+            name: videos[index].name,
+            mime_type: videos[index].mime_type,
+            template_id: videos[index].template_id,
+        }
+        templatesData[month][dayIndex].training = data;
         index++;
         dayIndex++;
         if (index === videosLength) {
@@ -172,4 +217,46 @@ function addVideosTOTemplates() {
     fs.writeFileSync(__dirname + '/src/data/templates.json', JSON.stringify(templatesData, null, 2));
 }
 
-addVideosTOTemplates();
+
+function addImagesTOTemplates() {
+    const images = JSON.parse(fs.readFileSync(__dirname + '/images.json', 'utf-8'));
+    const templatesData = JSON.parse(fs.readFileSync(__dirname + '/src/data/templates.json', 'utf-8'));
+    const imagesLength = images.length;
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    let index = 0;
+    let dayIndex = 1;
+    const templatesReciept = [
+        "tn_STCi3PRlHKudD4kgSPTwT",
+        "tn_E1BxmKFI5mZHQxiaTPbTR",
+        "tn_bI5CWRwPKEl9usYYPbUJR",
+        "tn_Out3Bu0siwcuXNonfOuit",
+        "tn_Lr0yz9aLIIruVhzMCcd1O",
+        "tn_SXdbilaN9qSZFtudArd5B",
+    ];
+    let templateIndex = 0;
+    for(let i = 0; i < 30; i++) {
+        const videotoset = images[index];
+        const data = {
+            id: videotoset.id,
+            name: videotoset.name,
+            mime_type: videotoset.mime_type,
+            template_id: templatesReciept[templateIndex],
+        }
+        templatesData[month][dayIndex].recipe = data;
+        index++;
+        dayIndex++;
+        if (index === imagesLength) {
+            index = 0;
+        }
+        if (templateIndex === 6)
+        {
+            templateIndex = 0;
+        }
+    }
+    fs.writeFileSync(__dirname + '/src/data/templates.json', JSON.stringify(templatesData, null, 2));
+}
+
+addImagesTOTemplates();

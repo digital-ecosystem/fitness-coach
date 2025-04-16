@@ -1,44 +1,41 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js project to Azure Function App - fitness-coach
+name: redeploy the node app with the current code
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
-
-env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '20.x' # set this to the node version to use (supports 8.x, 10.x, 12.x)
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 'Checkout GitHub Action'
-        uses: actions/checkout@v4
+      # 1. Check out the code (useful if you need repo files on the runner)
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Setup Node ${{ env.NODE_VERSION }} Environment
-        uses: actions/setup-node@v3
+      # 2. SSH into your Azure server and run the commands
+      - name: SSH and restart PM2
+        uses: appleboy/ssh-action@v1.2.0
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          host: ${{ secrets.SSH_HOST }}        # e.g., your Azure VM's IP or DNS
+          username: ${{ secrets.SSH_USER }}    # e.g., azureuser
+          key: ${{ secrets.SSH_KEY }}          # private key stored in GitHub Secrets
+          script: |
+            # Navigate to your app directory
+            cd fitness-coach/
 
-      - name: 'Resolve Project Dependencies Using Npm'
-        shell: bash
-        run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-          npm install
-          npm run build --if-present
-          npm run test --if-present
-          popd
+            # delete the node_modules folder 
+            rm -rf node_modules/
+            rm package-lock.json
 
-      - name: 'Run Azure Functions Action'
-        uses: Azure/functions-action@v1
-        id: fa
-        with:
-          app-name: 'fitness-coach'
-          slot-name: 'Production'
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_281C481D3F4C4CA2834C8B67FF600AD0 }}
+            # (Optional) Pull latest changes if you're not using other deploy steps
+            git pull origin main
+
+            npm install
+
+            # Restart the PM2 process
+            pm2 stop index.js
+            pm2 start index.js
+
+            echo "PM2 restarted successfully"
