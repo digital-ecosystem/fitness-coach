@@ -4,23 +4,21 @@ on:
   push:
     branches:
       - main
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: fitness-coach
 
     steps:
-      # 1. Check out the code (useful if you need repo files on the runner)
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 2. SSH into your Azure server and run the commands
       - name: SSH and restart PM2
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.SSH_HOST }}        # e.g., your Azure VM's IP or DNS
-          username: ${{ secrets.SSH_USER }}    # e.g., azureuser
-          key: ${{ secrets.SSH_KEY }}          # private key stored in GitHub Secrets
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             # Navigate to your app directory
             cd fitness-coach/
