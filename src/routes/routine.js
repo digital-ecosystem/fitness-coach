@@ -10,7 +10,7 @@ import {
 const router = Router();
 
 //0 14 * * *
-cron.schedule("36 14 * * *", async () => {
+cron.schedule("0 14 * * *", async () => {
   console.log("running a task at 14");
   try {
       let after = null;

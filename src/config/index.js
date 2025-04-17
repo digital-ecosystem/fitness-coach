@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
+import {config} from 'dotenv';
 
-dotenv.config();
+config();
 
 const SUPERCHAT_API_KEY = process.env.SUPERCHAT_API_KEY;
 const SUPERCHAT_CHANNEL_ID = process.env.SUPERCHAT_CHANNEL_ID;

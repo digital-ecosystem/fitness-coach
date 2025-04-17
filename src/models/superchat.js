@@ -86,6 +86,9 @@ export async function sendMessage(templateId, video_id, contact_id) {
     );
 }
 
+console.log(SUPERCHAT_API_KEY);
+
+
 export async function listAllContacts(after) {
   let url = "https://api.superchat.com/v1.0/contacts?limit=100";
   if (after)
@@ -105,3 +108,4 @@ export async function listAllContacts(after) {
     .then((res) => res.json())
     .catch((err) => console.error(err));
 }
+
