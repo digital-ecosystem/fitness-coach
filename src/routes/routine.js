@@ -51,7 +51,7 @@ cron.schedule("0 14 * * *", async () => {
       while (after) {
         const response2 = await listAllContacts(after);
         if (!response2 || !response2.results) {
-          return console.error("No results found for contacts in the listAllContacts function");
+          break;
         }
         const contacts1 = response2.results;
         results = results.concat(contacts1);
@@ -113,7 +113,7 @@ cron.schedule("0 10 * * *", async () => {
       while (after) {
         const response2 = await listAllContacts(after);
         if (!response2 || !response2.results) {
-          return console.error("No results found for contacts in the listAllContacts function");
+          break;
         }
         const contacts1 = response2.results;
         results = results.concat(contacts1);
