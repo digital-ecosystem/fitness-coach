@@ -88,6 +88,8 @@ cron.schedule("0 14 * * *", async () => {
   }
 });
 
+console.log("Server get restarted");
+
 //0 10 * * *
 cron.schedule("0 10 * * *", async () => {
   console.log("running a task at 10:00");
