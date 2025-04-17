@@ -33,8 +33,8 @@ cron.schedule("0 14 * * *", async () => {
       let after = null;
       let results = [];
       const response = await listAllContacts(after);
-      if (!response.results) {
-        throw new Error("No results found for contacts in the listAllContacts function");
+      if (!response || !response.results) {
+        return console.error("No results found for contacts in the listAllContacts function");
       }
       const templates = JSON.parse(
             fs.readFileSync(__dirname + "/src/data/templates.json", "utf-8")
@@ -50,8 +50,8 @@ cron.schedule("0 14 * * *", async () => {
       }
       while (after) {
         const response2 = await listAllContacts(after);
-        if (!response2.results) {
-          throw new Error("No results found in the while loop");
+        if (!response2 || !response2.results) {
+          return console.error("No results found for contacts in the listAllContacts function");
         }
         const contacts1 = response2.results;
         results = results.concat(contacts1);
@@ -90,7 +90,7 @@ cron.schedule("0 14 * * *", async () => {
 
 //0 10 * * *
 cron.schedule("0 10 * * *", async () => {
-  console.log("running a task at 10 seconds");
+  console.log("running a task at 10:00");
   try {
       let after = null;
       let results = [];
@@ -102,8 +102,8 @@ cron.schedule("0 10 * * *", async () => {
       const month = date.getMonth() + 1;
       const day = date.getDate();
       const response = await listAllContacts(after);
-      if (!response.results) {
-        throw new Error("No results found for contacts");
+      if (!response || !response.results) {
+        return console.error("No results found for contacts in the listAllContacts function");
       }
       const contacts = response.results;
       results = results.concat(contacts);
@@ -112,8 +112,8 @@ cron.schedule("0 10 * * *", async () => {
       }
       while (after) {
         const response2 = await listAllContacts(after);
-        if (!response2.results) {
-          throw new Error("No results found");
+        if (!response2 || !response2.results) {
+          return console.error("No results found for contacts in the listAllContacts function");
         }
         const contacts1 = response2.results;
         results = results.concat(contacts1);
@@ -125,7 +125,7 @@ cron.schedule("0 10 * * *", async () => {
       }
       for (let index = 0; index < results.length; index++) {
         const result = results[index];
-        if (result.custom_attributes.length > 0)
+        if (result && result.custom_attributes && result.custom_attributes.length > 0)
         {
           const custom_attributes = result.custom_attributes;
           for (let index = 0; index < custom_attributes.length; index++) {

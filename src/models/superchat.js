@@ -92,6 +92,7 @@ export async function listAllContacts(after) {
   {
     url = url + "&after=" + after;
   }
+  console.log(SUPERCHAT_API_KEY);
   const options = {
     method: "GET",
     headers: {

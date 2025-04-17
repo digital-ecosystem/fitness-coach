@@ -28,7 +28,7 @@ jobs:
             rm package-lock.json
 
             # (Optional) Pull latest changes if you're not using other deploy steps
-            git pull origin main
+            git pull
 
             npm install
 

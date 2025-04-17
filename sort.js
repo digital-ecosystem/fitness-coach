@@ -257,4 +257,3 @@ function addImagesTOTemplates() {
     fs.writeFileSync(__dirname + '/src/data/templates.json', JSON.stringify(templatesData, null, 2));
 }
 
-addImagesTOTemplates();
