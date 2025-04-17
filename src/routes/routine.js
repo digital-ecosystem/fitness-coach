@@ -9,25 +9,8 @@ import {
 
 const router = Router();
 
-
-// cron.schedule("*/5 * * * * *", async () => {
-//   console.log("running a task every minute seconds");
-//   try {
-//     const date = new Date();
-//     date.setFullYear(2025);
-//     date.setMonth(0); // January is month 0 in JavaScript
-//     date.setDate(5);
-//     const year = date.getFullYear();
-//     const month = date.getMonth() + 1;
-//     const day = date.getDate();
-//     console.log(month);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-
 //0 14 * * *
-cron.schedule("0 14 * * *", async () => {
+cron.schedule("36 14 * * *", async () => {
   console.log("running a task at 14");
   try {
       let after = null;

@@ -20,20 +20,17 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            # Navigate to your app directory
             cd fitness-coach/
 
-            # delete the node_modules folder 
+            pm2 stop index.js
+
             rm -rf node_modules/
             rm package-lock.json
 
-            # (Optional) Pull latest changes if you're not using other deploy steps
             git pull
 
             npm install
 
-            # Restart the PM2 process
-            pm2 stop index.js
             pm2 start index.js
 
             echo "PM2 restarted successfully"
