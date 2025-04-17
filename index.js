@@ -4,8 +4,8 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import bodyParser from "body-parser";
 import { config } from "dotenv";
-import create from "./src/routes/create_customer.js";
-import update from "./src/routes/update_customer.js";
+//import create from "./src/routes/create_customer.js";
+//import update from "./src/routes/update_customer.js";
 import home from "./src/routes/home.js";
 import routine from "./src/routes/routine.js";
 import {

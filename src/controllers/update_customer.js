@@ -1,5 +1,5 @@
 import fs from 'fs';
-import {Customer} from '../models/Customer.js';
+import {Customer} from '../models/customer.js';
 
 const updateCustomer = async (req, res) => {
     const { id, first_name, last_name, handles } = req.body.contact;
